@@ -2,7 +2,7 @@ package info.pablogiraldo.ejercicios;
 
 import java.util.Scanner;
 
-public class Ej18 {
+public class Ej19 {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -15,7 +15,7 @@ public class Ej18 {
 
 		sc.close();
 
-		frase = frase.replace('a', 'e');
+		frase = frase.replaceAll("\\s+", "");
 
 		System.out.println(frase);
 
