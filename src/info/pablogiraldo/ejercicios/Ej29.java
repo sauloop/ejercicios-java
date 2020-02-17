@@ -19,11 +19,9 @@ public class Ej29 {
 		System.out.println("Segundo número:");
 		numB = sc.nextInt();
 
-		numAleatorio = (int) (Math.random() * 10);
-
-		while (!(numAleatorio > numA && numAleatorio < numB)) {
+		do {
 			numAleatorio = (int) (Math.random() * 10);
-		}
+		} while (!(numAleatorio > numA && numAleatorio < numB));
 
 		sc.close();
 
