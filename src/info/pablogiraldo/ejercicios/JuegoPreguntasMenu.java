@@ -36,7 +36,7 @@ public class JuegoPreguntasMenu {
 				System.out.println("Respuesta:");
 				respuesta = sc.nextInt();
 
-			} while (!(respuesta > 0 && respuesta < opciones[0].length));
+			} while (!(respuesta > 0 && respuesta < opciones[0].length + 1));
 
 			if (respuesta == respuestas[i]) {
 				aciertos++;
