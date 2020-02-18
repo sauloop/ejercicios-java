@@ -2,7 +2,9 @@ package info.pablogiraldo.ejercicios;
 
 import java.util.Scanner;
 
-public class JuegoPreguntasMenu {
+// En pruebas
+
+public class JuegoPreguntasMenuB {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -26,7 +28,6 @@ public class JuegoPreguntasMenu {
 		for (int i = 0; i < numPreguntas; i++) {
 
 			System.out.println(preguntas[i]);
-//			System.out.println(opciones.length);
 
 			for (int j = 0; j < opciones[0].length; j++) {
 				System.out.println(opciones[i][j]);
@@ -34,8 +35,10 @@ public class JuegoPreguntasMenu {
 
 			do {
 
-				System.out.println("Respuesta:");
-				respuesta = sc.nextInt();
+				while (!sc.hasNextInt()) {
+					System.out.println("Respuesta:");
+					respuesta = sc.nextInt();
+				}
 
 			} while (!(respuesta > 0 && respuesta < opciones[0].length + 1));
 
