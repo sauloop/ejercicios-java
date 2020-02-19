@@ -35,6 +35,8 @@ public class Ej15 {
 		System.out.println("Cambiar por:");
 		numNuevo = sc.nextInt();
 
+		sc.close();
+
 		for (int i = 0; i < numAleatorios.length; i++) {
 			if (numAleatorios[i].equals(String.valueOf(numActual))) {
 				numAleatorios[i] = "\"" + String.valueOf(numNuevo) + "\"";
