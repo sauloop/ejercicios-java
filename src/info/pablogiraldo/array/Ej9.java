@@ -3,7 +3,7 @@ package info.pablogiraldo.array;
 public class Ej9 {
 
 	public static void main(String[] args) {
-		int[] numeros = { 70, 1000, 1, 40 };
+		int[] numeros = { 70, 99000, 1, 40 };
 
 		int mayor = numeros[0];
 
@@ -48,7 +48,7 @@ public class Ej9 {
 	public static int numCeros(int num) {
 		int div = 10;
 		int ceros = 0;
-		while (num / div >= 1) {
+		while (num / div >= 10) {
 			ceros++;
 			div *= 10;
 		}
