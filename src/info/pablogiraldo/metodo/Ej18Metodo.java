@@ -33,13 +33,7 @@ public class Ej18Metodo {
 
 	public static boolean potenciaEsMayorDe10(int base, int exponente) {
 
-		double baseDo = base;
-
-		double exponenteDo = exponente;
-
-		int resultado = (int) Math.pow(baseDo, exponenteDo);
-
-		System.out.println(resultado);
+		double resultado = Math.pow(base, exponente);
 
 		if (resultado > 10) {
 			return true;
