@@ -1,20 +1,21 @@
 package info.pablogiraldo.file;
 
-import java.io.*;
+import java.util.Scanner;
 
 public class FileTest {
 	public static void main(String[] args) {
-		try {
-			FileWriter wr = new FileWriter("C:\\pruebas\\artest_b.txt");
+		Scanner sc = new Scanner(System.in);
+		int number;
+		do {
+			System.out.println("Please enter a positive number:");
+			while (!sc.hasNextInt()) {
+				System.out.println("That's not a number!");
+				sc.next(); // this is important!
+			}
+			number = sc.nextInt();
+			sc.close();
+		} while (number <= 0);
 
-		
-			wr.write("Texto A.");
-			wr.close();
-			System.out.println("Texto escrito.");
-
-		} catch (Exception e) {
-			System.out.println("Error.");
-			e.printStackTrace();
-		}
+		System.out.println("Thank you! Got " + number);
 	}
 }
