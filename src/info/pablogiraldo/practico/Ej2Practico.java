@@ -7,7 +7,6 @@ public class Ej2Practico {
 	public static void main(String[] args) {
 
 		String[] cadenasA = { "ab", "10", "hola" };
-
 		String[] cadenasB = { "abcdefg", "20", "hola" };
 
 		System.out.println(ajuste(cadenasA));
