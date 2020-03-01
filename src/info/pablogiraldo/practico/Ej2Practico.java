@@ -2,7 +2,7 @@ package info.pablogiraldo.practico;
 
 public class Ej2Practico {
 
-	// Ajuste cadenas A
+	// Ajuste cadenas
 
 	public static void main(String[] args) {
 
