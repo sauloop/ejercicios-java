@@ -1,6 +1,6 @@
 package info.pablogiraldo.file;
 
-public class Puntuacion {
+public class Puntuacion implements Comparable<Puntuacion> {
 
 	private String nombre;
 	private int puntos;
@@ -30,8 +30,19 @@ public class Puntuacion {
 	}
 
 	@Override
+	public int compareTo(Puntuacion comparepuntuacion) {
+		int comparepuntos = ((Puntuacion) comparepuntuacion).getPuntos();
+		/* For Ascending order */
+//		return this.puntos - comparepuntos;
+
+		/* For Descending order do like this */
+		// return compareage-this.studentage;
+		return comparepuntos - this.puntos;
+	}
+
+	@Override
 	public String toString() {
-		return nombre + ": " + puntos + ".";
+		return nombre + ": " + puntos;
 	}
 
 }

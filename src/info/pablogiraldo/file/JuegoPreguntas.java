@@ -1,8 +1,11 @@
 package info.pablogiraldo.file;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class JuegoPreguntas {
@@ -58,24 +61,31 @@ public class JuegoPreguntas {
 
 			System.out.println("\n");
 			System.out.println("1.Jugar");
-			System.out.println("2.Instrucciones");
-			System.out.println("3.Ver puntuaciones");
+			System.out.println("2.Añadir pregunta");
+			System.out.println("3.Instrucciones");
+			System.out.println("4.Ver puntuaciones");
 			System.out.println("0.Salir");
 
+			System.out.println("\n");
+			System.out.println("Opción:");
 			usrIn = sc.nextLine();
 
 			opcionMenu = Integer.parseInt(usrIn);
 
 			switch (opcionMenu) {
 			case 1:
-				this.jugar();
+				this.jugar(sc);
 				break;
 
 			case 2:
-				this.instrucciones();
+				this.addPregunta(sc);
 				break;
 
 			case 3:
+				this.instrucciones();
+				break;
+
+			case 4:
 				this.listarPuntuaciones();
 				break;
 
@@ -87,8 +97,6 @@ public class JuegoPreguntas {
 	}
 
 	public void cargarPreguntas() {
-
-//		System.out.println("Leyendo fichero...");
 
 		try {
 			FileReader fr = new FileReader(rutaDatosPreguntas);
@@ -116,8 +124,6 @@ public class JuegoPreguntas {
 
 	public void cargarPuntuaciones() {
 
-//		System.out.println("Leyendo fichero...");
-
 		try {
 			FileReader fr = new FileReader(rutaDatosPuntuaciones);
 			BufferedReader br = new BufferedReader(fr);
@@ -142,9 +148,68 @@ public class JuegoPreguntas {
 		}
 	}
 
-	public void jugar() {
-		Scanner sc = new Scanner(System.in);
-		String nombre = "";
+	public void guardarPreguntas() {
+
+		try {
+			FileWriter fw = new FileWriter(rutaDatosPreguntas, false);
+			BufferedWriter bw = new BufferedWriter(fw);
+
+			for (int i = 0; i < this.preguntas.size(); i++) {
+
+				bw.write(this.preguntas.get(i).getPregunta() + "#" + this.preguntas.get(i).getOpcion1() + "#"
+						+ this.preguntas.get(i).getOpcion2() + "#" + this.preguntas.get(i).getOpcion3() + "#"
+						+ this.preguntas.get(i).getRespuesta() + "\n");
+
+			}
+
+			bw.close();
+		} catch (Exception e) {
+			System.out.println("Ha habido problemas: " + e.getMessage());
+		}
+	}
+
+	public void guardarPuntuaciones() {
+
+		try {
+			FileWriter fw = new FileWriter(rutaDatosPuntuaciones, false);
+			BufferedWriter bw = new BufferedWriter(fw);
+
+			for (int i = 0; i < this.puntuaciones.size(); i++) {
+
+				bw.write(this.puntuaciones.get(i).getNombre() + "#" + this.puntuaciones.get(i).getPuntos() + "\n");
+
+			}
+
+			bw.close();
+		} catch (Exception e) {
+			System.out.println("Ha habido problemas: " + e.getMessage());
+		}
+	}
+
+	public void addPregunta(Scanner sc) {
+
+		Pregunta nuevaPregunta = new Pregunta();
+
+		System.out.println("\n");
+		System.out.println("Pregunta:");
+		nuevaPregunta.setPregunta(sc.nextLine());
+		System.out.println("Opción 1:");
+		nuevaPregunta.setOpcion1(sc.nextLine());
+		System.out.println("Opción 2:");
+		nuevaPregunta.setOpcion2(sc.nextLine());
+		System.out.println("Opción 3:");
+		nuevaPregunta.setOpcion3(sc.nextLine());
+		System.out.println("Respuesta:");
+		nuevaPregunta.setRespuesta(Integer.parseInt(sc.nextLine()));
+
+		this.preguntas.add(nuevaPregunta);
+
+		this.guardarPreguntas();
+	}
+
+	public void jugar(Scanner sc) {
+
+		this.puntos = 0;
 
 		for (int i = 0; i < this.preguntas.size(); i++) {
 			Pregunta pregunta = this.preguntas.get(i);
@@ -164,6 +229,15 @@ public class JuegoPreguntas {
 			}
 		}
 
+		this.datosJugador(sc);
+
+	}
+
+	public void datosJugador(Scanner sc) {
+
+		String nombre = "";
+
+		System.out.println("\n");
 		System.out.println("Nombre:");
 		nombre = sc.nextLine();
 
@@ -171,6 +245,16 @@ public class JuegoPreguntas {
 			Puntuacion puntuacion = new Puntuacion(nombre, this.puntos);
 			this.puntuaciones.add(puntuacion);
 
+			this.guardarPuntuaciones();
+
+		} else {
+			for (int i = 0; i < this.puntuaciones.size(); i++) {
+				if (puntuaciones.get(i).getNombre().equals(nombre) && puntuaciones.get(i).getPuntos() < this.puntos) {
+					puntuaciones.get(i).setPuntos(this.puntos);
+				}
+			}
+
+			this.guardarPuntuaciones();
 		}
 
 	}
@@ -181,11 +265,20 @@ public class JuegoPreguntas {
 	}
 
 	public void listarPuntuaciones() {
+
+		Collections.sort(this.puntuaciones);
+
 		System.out.println("\n");
 		System.out.println("Puntuaciones:");
-		for (Puntuacion puntuacion : this.puntuaciones) {
-			System.out.println(puntuacion);
+		if (this.puntuaciones.size() > 0) {
+			for (Puntuacion puntuacion : this.puntuaciones) {
+				System.out.println(puntuacion);
+			}
+
+		} else {
+			System.out.println("No hay puntuaciones guardadas.");
 		}
+
 	}
 
 }

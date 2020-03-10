@@ -6,9 +6,6 @@ public class JuegoPreguntasMain {
 
 		JuegoPreguntas juegoPreguntas = new JuegoPreguntas();
 
-//		juegoPreguntas.cargarPreguntas();
-//		juegoPreguntas.cargarPuntuaciones();
-
 		juegoPreguntas.cargarDatos();
 
 		juegoPreguntas.menu();
